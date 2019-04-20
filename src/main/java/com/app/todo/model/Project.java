@@ -1,4 +1,9 @@
 package com.app.todo.model;
 
-public class Project {
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.io.Serializable;
+
+
+public class Project implements Serializable {
 }

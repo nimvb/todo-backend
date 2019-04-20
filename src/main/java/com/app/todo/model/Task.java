@@ -1,4 +1,7 @@
 package com.app.todo.model;
 
-public class Task {
+import javax.persistence.*;
+import java.io.Serializable;
+
+public class Task implements Serializable {
 }
