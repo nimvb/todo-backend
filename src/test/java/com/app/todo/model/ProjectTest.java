@@ -2,10 +2,12 @@ package com.app.todo.model;
 
 import com.app.todo.AssertAnnotations;
 import com.app.todo.ReflectTool;
+import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.junit.Test;
 
 import javax.persistence.*;
+import java.util.Arrays;
 
 public class ProjectTest {
 
@@ -85,7 +87,8 @@ public class ProjectTest {
 
         Assert.assertEquals("", c.name());
         Assert.assertEquals("project", oneToMany.mappedBy());
-        Assert.assertEquals(CascadeType.ALL, oneToMany.cascade());
+      //  Assert.assertEquals(CascadeType.ALL, oneToMany.cascade());
+        Assertions.assertThat(oneToMany.cascade()).isEqualTo(Arrays.asList(CascadeType.ALL).toArray());
         Assert.assertEquals(FetchType.LAZY, oneToMany.fetch());
         Assert.assertEquals(true, oneToMany.orphanRemoval());
     }
