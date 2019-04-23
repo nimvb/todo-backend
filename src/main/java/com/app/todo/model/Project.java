@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Table
 @Entity
@@ -12,10 +13,11 @@ public class Project implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long      id;
     @Column
-    private String name;
-    @OneToMany(mappedBy = "project", cascade= CascadeType.ALL, orphanRemoval = true)
+    private String    name;
+
+    @OneToMany
     private List<Task> tasks;
 
     public Project() {
