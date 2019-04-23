@@ -6,6 +6,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import javax.persistence.*;
 import java.util.Arrays;
 
@@ -24,7 +26,7 @@ public class ProjectTest {
 
         AssertAnnotations.assertField(Project.class, "id",Id.class,GeneratedValue.class);
         AssertAnnotations.assertField(Project.class, "name",Column.class);
-        AssertAnnotations.assertField(Project.class, "tasks",Column.class,OneToMany.class);
+        AssertAnnotations.assertField(Project.class, "tasks",OneToMany.class);
     }
 
     @Test
@@ -79,16 +81,12 @@ public class ProjectTest {
     @Test
     public void tasksTest() {
 
-        Column c
-                = ReflectTool.getFieldAnnotation(
-                Project.class, "tasks", Column.class);
 
         OneToMany oneToMany = ReflectTool.getFieldAnnotation(Project.class,"tasks",OneToMany.class);
 
-        Assert.assertEquals("", c.name());
         Assert.assertEquals("project", oneToMany.mappedBy());
-      //  Assert.assertEquals(CascadeType.ALL, oneToMany.cascade());
-        Assertions.assertThat(oneToMany.cascade()).isEqualTo(Arrays.asList(CascadeType.ALL).toArray());
+
+        Assert.assertEquals(Arrays.asList(CascadeType.ALL).toArray(), oneToMany.cascade());
         Assert.assertEquals(FetchType.LAZY, oneToMany.fetch());
         Assert.assertEquals(true, oneToMany.orphanRemoval());
     }

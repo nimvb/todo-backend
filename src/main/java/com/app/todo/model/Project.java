@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
 @Table
 
@@ -18,13 +19,13 @@ public class Project implements Serializable {
 
     @Column
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    // @JoinColumn(name = "Project_tasks")
     private List<Task> tasks = new ArrayList<>();
 
 
     public Project() {
 
     }
+
 
 
     public long getId() {
