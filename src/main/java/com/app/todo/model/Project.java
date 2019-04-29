@@ -19,6 +19,7 @@ public class Project implements Serializable {
     private List<Task> tasks;
 
     public Project() {
+        this.tasks = new ArrayList<>();
     }
 
     public long getId() {
@@ -43,5 +44,15 @@ public class Project implements Serializable {
 
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    public void addTask(Task task) {
+        task.setProject(this);
+        this.tasks.add(task);
+    }
+
+    public void removeTask(Task task) {
+        this.tasks.remove(task);
+        task.setProject(null);
     }
 }

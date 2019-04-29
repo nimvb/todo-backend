@@ -25,6 +25,16 @@ public class Task implements Serializable {
     public Task() {
     }
 
+    public Task(String name, boolean done) {
+        this.name = name;
+        this.done = done;
+    }
+
+    public Task(String name) {
+        this.name = name;
+        this.done = false;
+    }
+
     public long getId() {
         return id;
     }
