@@ -38,5 +38,27 @@ public class Exception implements Serializable {
         this.errors.remove(error);
     }
 
+    public HttpStatus getStatus() {
+        return status;
+    }
 
+    public void setStatus(HttpStatus status) {
+        this.status = status;
+    }
+
+    public List<Error> getErrors() {
+        return errors;
+    }
+
+    public void setErrors(List<Error> errors) {
+        this.errors = errors;
+    }
+
+    public LocalDateTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalDateTime time) {
+        this.time = time;
+    }
 }
