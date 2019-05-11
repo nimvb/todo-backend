@@ -1,5 +1,6 @@
 package com.app.todo.service;
 
+import com.app.todo.exceptions.ResourceNotFoundException;
 import com.app.todo.model.Project;
 import com.app.todo.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Transactional
     @Override
     public void delete(Project project) {
-        repository.delete(project);
+        repository.deleteById(project.getId());
     }
 
     @Override
@@ -54,6 +55,14 @@ public class ProjectServiceImpl implements ProjectService {
         repository.findProjectByName(name).ifPresent(project -> {
             repository.delete(project);
         });
+    }
+
+    @Transactional
+    @Override
+    public void deleteById(long id) {
+        Project project = repository.findProjectById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found!"));
+        repository.deleteById(project.getId());
+        //delete(project);
     }
 
 

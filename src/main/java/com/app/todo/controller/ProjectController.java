@@ -9,10 +9,7 @@ import com.app.todo.service.ProjectService;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,6 +24,7 @@ public class ProjectController {
     ProjectMapper mapper = Mappers.getMapper(ProjectMapper.class);
 
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("projects")
     public ResponseEntity<List<ProjectDto>> projects() {
         List<Project> projects = service.findAll();
@@ -40,6 +38,15 @@ public class ProjectController {
 
         Project project = service.findAll().stream().filter(p -> p.getId() == id).findFirst().orElseThrow(() -> new ResourceNotFoundException("Not found"));
         return ResponseEntity.ok().body(mapper.toProjectDto(project));
+
+    }
+
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @DeleteMapping("projects/{id}")
+    public ResponseEntity deleteProject(@PathVariable("id") long id) {
+        service.deleteById(id);
+        return ResponseEntity.ok().build();
 
     }
 }
